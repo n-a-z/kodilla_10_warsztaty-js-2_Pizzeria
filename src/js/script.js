@@ -65,6 +65,17 @@
     }
     renderInMenu(){
       const thisProduct = this;
+
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      //console.log(generatedHTML);
+
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      //console.log('thisProduct.element:',thisProduct.element);
+
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      //console.log('menuContainer:', menuContainer);
+
+      menuContainer.appendChild(thisProduct.element);
     }
   }
 
