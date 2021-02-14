@@ -53,9 +53,10 @@
   };
 
   class Product{
-    constructor(){
+    constructor(id, data){
       const thisProduct = this;
-
+      thisProduct.id = id;
+      thisProduct.data = data;
       console.log('new Product:',thisProduct);
     }
   }
@@ -68,8 +69,6 @@
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       }
-      //const testProduct = new Product();
-      //console.log('testProduct:',testProduct);
     },
     initData: function(){
       const thisApp = this;
