@@ -167,7 +167,7 @@
               price += option.price;
 
             } else if(option.default) {
-                price -= option.price;
+              price -= option.price;
             }
           }
         }
