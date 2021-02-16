@@ -91,6 +91,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -160,9 +161,26 @@
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
 
-          if(formData[paramId] && formData[paramId].includes(optionId)){
-            console.log('inside loop');
+          if(optionImage){
+            //console.log('optionImage:',optionImage);
+            if(optionSelected){
+              //console.log(optionImage.className);
+              //console.log(classNames.menuProduct.imageVisible);
+              //optionImage.className = classNames.menuProduct.imageVisible + ' ' + paramId + '-' + optionId;
+              //optionImage.className = 'active' + ' ' + paramId + '-' + optionId;
+              //optionImage.className = classNames.menuProduct.imageVisible; //dlaczego sama klasa active nie działa?
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              //optionImage.className = paramId + '-' + optionId;
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+            //console.log(optionImage.className);
+          }
+
+          if(optionSelected){
             if(!option.defaul){
               price += option.price;
 
