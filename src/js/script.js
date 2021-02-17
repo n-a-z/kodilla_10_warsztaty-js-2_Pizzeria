@@ -229,13 +229,14 @@
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
-      thisWidget.value = thisWidget.input.value;
-      //thisWidget.value = settings.amountWidget.defaultValue;
+      //thisWidget.value = thisWidget.input.value;
+      thisWidget.value = settings.amountWidget.defaultValue;
     }
 
     setValue(value){
       const thisWidget = this;
       const newValue = parseInt(value);
+      //console.log('thisWidget.value:',thisWidget.value);
 
       if(!isNaN(newValue) && thisWidget.value !== newValue && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
