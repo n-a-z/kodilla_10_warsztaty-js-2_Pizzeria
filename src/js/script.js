@@ -212,6 +212,8 @@
       console.log('constructor arguments:',element);
 
       thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
+
     }
 
     getElements(element){
@@ -221,6 +223,17 @@
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      if(!isNaN(newValue) && newValue !== thisWidget.value) {
+      thisWidget.value = newValue;
+      }
+      thisWidget.input.value = thisWidget.value;
     }
   }
 
