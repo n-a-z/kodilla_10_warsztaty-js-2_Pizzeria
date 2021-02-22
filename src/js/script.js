@@ -281,7 +281,7 @@
         const param = thisProduct.data.params[paramId];
         //console.log("params[paramId]:",param);
         params[paramId] = {
-          name: param.label,
+          label: param.label,
           options: {}
         };
 
@@ -293,7 +293,7 @@
           //console.log('option:',optionId);
           //console.log('optionSelected:',optionSelected);
           if(optionSelected){
-            params[paramId].label = param.label;
+            //params[paramId].label = param.label;
             params[paramId].options[optionId] = param.options[optionId].label;
           }
         }
