@@ -293,7 +293,7 @@
           //console.log('option:',optionId);
           //console.log('optionSelected:',optionSelected);
           if(optionSelected){
-            params[paramId].label = param.options[optionId].label;
+            params[paramId].label = param.label;
             params[paramId].options[optionId] = param.options[optionId].label;
           }
         }
