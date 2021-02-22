@@ -283,7 +283,7 @@
         params[paramId] = {
           name: param.label,
           options: {}
-        }
+        };
 
         // for every option in this category
         for(let optionId in param.options) {
@@ -293,7 +293,8 @@
           //console.log('option:',optionId);
           //console.log('optionSelected:',optionSelected);
           if(optionSelected){
-            params[paramId].options[optionId] = param.options[optionId].label
+            params[paramId].label = param.options[optionId].label;
+            params[paramId].options[optionId] = param.options[optionId].label;
           }
         }
       }
