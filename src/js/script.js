@@ -382,7 +382,7 @@
     constructor(element){
       const thisCart = this;
 
-      thisCart.preventDefault = [];
+      thisCart.products = [];
 
       thisCart.getElements(element);
       thisCart.initActions();
@@ -420,6 +420,9 @@
       thisCart.dom.productList.appendChild(generatedDOM);
 
       //console.log('adding product', menuProduct);
+
+      thisCart.products.push(menuProduct);
+      console.log('thisCart.products:',thisCart.products);
     }
   }
 
