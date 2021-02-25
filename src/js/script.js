@@ -451,6 +451,9 @@
 
           thisApp.data.products = parsedResponse;
           thisApp.initMenu();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
         });
       console.log('thisApp.data:', JSON.stringify(thisApp.data));
     },
