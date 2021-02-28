@@ -435,7 +435,7 @@
       thisCartProduct.name = menuProduct.name;
       thisCartProduct.params = menuProduct.params;
       thisCartProduct.price = menuProduct.price;
-      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.priceSingle = menuProduct.priceSingle; //Pytanie: do czego odnosi się menuProduct. ?
       thisCartProduct.amount = menuProduct.amount;
 
       thisCartProduct.getElements(element);
@@ -461,6 +461,17 @@
       const thisCartProduct = this;
 
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
+        thisCartProduct.amount = thisCartProduct.amountWidget.value;
+        //console.log('thisCartProduct.amount:',thisCartProduct.amount);
+        //thisCartProduct.priceSingle;
+        thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
+        //console.log('thisCartProduct.priceSingle:', thisCartProduct.priceSingle);
+        //console.log('thisCartProduct.price:', thisCartProduct.price);
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+        //console.log('thisCartProduct.dom.price:',thisCartProduct.dom.price);
+      });
     }
   }
 
