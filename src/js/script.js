@@ -424,6 +424,7 @@
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       //thisCart.products.push(menuProduct);
       //console.log('thisCart.products:',thisCart.products);
+      thisCart.update();
     }
 
     update(){
@@ -443,6 +444,10 @@
       } else {
         thisCart.totalPrice = subtotalPrice;
       }
+
+      //console.log('totalNumber:',totalNumber);
+      //console.log('subtotalPrice:',subtotalPrice);
+      //console.log('thisCart.totalPrice:',thisCart.totalPrice);
     }
   }
 
