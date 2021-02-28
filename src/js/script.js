@@ -430,8 +430,19 @@
       const thisCart = this;
 
       const deliveryFee = settings.cart.defaultDeliveryFee;
-      const totalNumber = 0;
-      const subtotalPrice = 0;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+
+      for(let product of thisCart.products){
+        totalNumber += product.amount;
+        subtotalPrice += product.price;
+      }
+
+      if(totalNumber > 0) {
+        thisCart.totalPrice = deliveryFee + subtotalPrice;
+      } else {
+        thisCart.totalPrice = subtotalPrice;
+      }
     }
   }
 
