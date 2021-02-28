@@ -509,7 +509,7 @@
     sendOrder(){
       const thisCart = this;
       const url = settings.db.url + '/' + settings.db.order;
-      console.log('url:',url);
+      //console.log('url:',url);
 
       const payload = {
         address: thisCart.dom.address.value,
@@ -521,11 +521,29 @@
         products: []
       };
 
-      for(let prod of thisCart.products) {
-        payload.products.push(prod.getData());
+      for(let product of thisCart.products) {
+        payload.products.push(product.getData()); //Pytanie: getData() jest zadeklarowana w innej metodzie. Widzi ją dlatego, że Cart tworzy instancję new CartProduct? Czemu this nie jest potrzebne?
       }
+      //console.log('payload:',payload);
 
-      console.log('payload',payload);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      };
+
+      fetch(url, options)
+        //.then(function(response){
+          //return response.json();
+        //})
+        //.then(function(parsedResponse){
+          //console.log('parsedResponse:',parsedResponse);
+        //})
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
   }
 
@@ -536,6 +554,7 @@
       thisCartProduct.id = menuProduct.id;
       thisCartProduct.name = menuProduct.name;
       thisCartProduct.params = menuProduct.params;
+      //thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
       thisCartProduct.price = menuProduct.price;
       thisCartProduct.priceSingle = menuProduct.priceSingle; //Pytanie: do czego odnosi się menuProduct. ?
       thisCartProduct.amount = menuProduct.amount;
