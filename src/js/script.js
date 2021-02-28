@@ -409,11 +409,18 @@
 
     initActions(){
       const thisCart = this;
+
       thisCart.dom.toggleTrigger.addEventListener('click', function(){
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+
       thisCart.dom.productList.addEventListener('updated', function(){
         thisCart.update();
+      });
+
+      thisCart.dom.productList.addEventListener('remove', function(event){
+        thisCart.remove(event.detail.cartProduct);
+        //console.log('event.detail.cartProduct',event.detail.cartProduct);
       });
     }
 
@@ -471,6 +478,23 @@
       for(let totalPrice of thisCart.dom.totalPrice){
         totalPrice.innerHTML = thisCart.totalPrice;
       }
+    }
+
+    remove(product){
+      const thisCart = this;
+
+      //console.log('thisCart.products.indexOf(product):',thisCart.products.indexOf(product));
+
+      /* Removes product values from thisCart.products table */
+      //const productIndex = thisCart.products.indexOf(product);
+      //thisCart.products.splice(productIndex,1);
+      thisCart.products.splice(thisCart.products.indexOf(product),1);
+
+      /* Removes dom element of product */
+      //console.log('product',product);
+      product.dom.wrapper.remove(); //Pytanie: dlaczego to działa (dom.wrapper na product)? Czy dlatego, że product to tak naprawdę event.detail.cartProduct ?
+
+      thisCart.update();
     }
   }
 
