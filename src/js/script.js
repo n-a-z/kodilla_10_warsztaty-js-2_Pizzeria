@@ -404,6 +404,10 @@
       thisCart.dom.subTotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
+      thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
+
       //console.log(thisCart.dom.toggleTrigger);
     }
 
@@ -421,6 +425,11 @@
       thisCart.dom.productList.addEventListener('remove', function(event){
         thisCart.remove(event.detail.cartProduct);
         //console.log('event.detail.cartProduct',event.detail.cartProduct);
+      });
+
+      thisCart.dom.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisCart.sendOrder();
       });
     }
 
@@ -446,19 +455,19 @@
     update(){
       const thisCart = this;
 
-      const deliveryFee = settings.cart.defaultDeliveryFee;
-      let totalNumber = 0;
-      let subTotalPrice = 0;
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.totalNumber = 0;
+      thisCart.subTotalPrice = 0;
 
       for(let product of thisCart.products){
-        totalNumber += product.amount;
-        subTotalPrice += product.price;
+        thisCart.totalNumber += product.amount;
+        thisCart.subTotalPrice += product.price;
       }
 
-      if(totalNumber > 0) {
-        thisCart.totalPrice = deliveryFee + subTotalPrice;
+      if(thisCart.totalNumber > 0) {
+        thisCart.totalPrice = thisCart.deliveryFee + thisCart.subTotalPrice;
       } else {
-        thisCart.totalPrice = subTotalPrice;
+        thisCart.totalPrice = thisCart.subTotalPrice;
       }
 
       //console.log('totalNumber:',totalNumber);
@@ -466,13 +475,13 @@
       //console.log('thisCart.totalPrice:',thisCart.totalPrice);
 
       //console.log('thisCart.dom.subTotalPrice:',thisCart.dom.subTotalPrice);
-      if(totalNumber > 0){
-        thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      if(thisCart.totalNumber > 0){
+        thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
       }else {
         thisCart.dom.deliveryFee.innerHTML = 0;
       }
 
-      thisCart.dom.subTotalPrice.innerHTML = subTotalPrice;
+      thisCart.dom.subTotalPrice.innerHTML = thisCart.subTotalPrice;
       //console.log('thisCart.totalPrice:',thisCart.totalPrice);
       //console.log('thisCart.dom.totalPrice:',thisCart.dom.totalPrice);
       for(let totalPrice of thisCart.dom.totalPrice){
@@ -495,6 +504,24 @@
       product.dom.wrapper.remove(); //Pytanie: dlaczego to działa (dom.wrapper na product)? Czy dlatego, że product to tak naprawdę event.detail.cartProduct ?
 
       thisCart.update();
+    }
+
+    sendOrder(){
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.order;
+      console.log('url:',url);
+
+      const payload = {
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
+        totalPrice: thisCart.totalPrice,
+        subTotalPrice: thisCart.subTotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        products: []
+      };
+
+      console.log('payload',payload);
     }
   }
 
