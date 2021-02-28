@@ -521,6 +521,10 @@
         products: []
       };
 
+      for(let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
+
       console.log('payload',payload);
     }
   }
@@ -597,6 +601,19 @@
         event.preventDefault();
         thisCartProduct.remove();
       });
+    }
+
+    getData(){
+      const thisCartProduct = this;
+
+      return {
+        id: thisCartProduct.id,
+        amount: thisCartProduct.amount,
+        price: thisCartProduct.price,
+        priceSingle: thisCartProduct.priceSingle,
+        name: thisCartProduct.name,
+        params: thisCartProduct.params
+      };
     }
   }
 
