@@ -6,8 +6,21 @@ class Booking {
   constructor(element) {
     const thisBooking = this;
 
-    console.log('thisBooking.booking',thisBooking.booking);
+    thisBooking.render(element);
+    thisBooking.initWidget();
+    //console.log('thisBooking.booking',thisBooking.booking);
 
+  }
+
+  render(element) {
+    const thisBooking = this;
+
+    //console.log('thisBooking.booking',thisBooking.booking);
+
+  }
+
+  initWidget() {
+    const thisBooking = this;
   }
 }
 
