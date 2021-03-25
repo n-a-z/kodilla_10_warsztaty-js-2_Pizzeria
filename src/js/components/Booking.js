@@ -1,6 +1,6 @@
-import { select, classNames, settings, templates } from '../settings.js';
-import CartProduct from './CartProduct.js';
-import utils from '../utils.js';
+import { templates } from '../settings.js';
+//import CartProduct from './CartProduct.js';
+//import utils from '../utils.js';
 
 class Booking {
   constructor(element) {
@@ -15,12 +15,19 @@ class Booking {
   render(element) {
     const thisBooking = this;
 
-    //console.log('thisBooking.booking',thisBooking.booking);
+    //console.log('Booking.render(element)',element);
+
+    const generatedHTML = templates.bookingWidget(element);
+    //const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
+    thisBooking.dom = {};
+    thisBooking.dom.wrapper = element;
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
 
   }
 
   initWidget() {
-    const thisBooking = this;
+    //const thisBooking = this;
   }
 }
 
