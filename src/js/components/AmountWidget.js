@@ -34,33 +34,16 @@ class AmountWidget extends BaseWidget {
     //thisWidget.value = settings.amountWidget.defaultValue; //BaseWidget
   }
 
-  setValue(value) {
-    const thisWidget = this;
-    const newValue = thisWidget.parseValue(value);
-    //console.log('thisWidget.value:',thisWidget.value);
-
-    if (
-      //!isNaN(newValue) &&
-      thisWidget.value !== newValue &&
-      thisWidget.isValid(newValue)
-    ) {
-      thisWidget.value = newValue;
-      //console.log('if newValue',newValue);
-      //thisWidget.announce();
-      thisWidget.announce();
-    }
-
-    thisWidget.dom.input.value = thisWidget.value;
-  }
-
-  parseValue(value) {
-    return parseInt(value);
-  }
-
   isValid(value) {
     return !isNaN(value)
     && value >= settings.amountWidget.defaultMin
     && value <= settings.amountWidget.defaultMax;
+  }
+
+  renderValue(){
+    const thisWidget = this;
+
+    thisWidget.dom.input.value = thisWidget.value;
   }
 
   initActions() {
