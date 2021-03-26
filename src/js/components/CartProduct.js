@@ -10,7 +10,7 @@ class CartProduct {
     thisCartProduct.params = menuProduct.params;
     //thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
     thisCartProduct.price = menuProduct.price;
-    thisCartProduct.priceSingle = menuProduct.priceSingle; //Pytanie: do czego odnosi się menuProduct. ?
+    thisCartProduct.priceSingle = menuProduct.priceSingle;
     thisCartProduct.amount = menuProduct.amount;
 
     thisCartProduct.getElements(element);

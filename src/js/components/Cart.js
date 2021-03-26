@@ -137,7 +137,7 @@ class Cart {
 
     /* Removes dom element of product */
     //console.log('product',product);
-    product.dom.wrapper.remove(); //Pytanie: dlaczego to działa (dom.wrapper na product)? Czy dlatego, że product to tak naprawdę event.detail.cartProduct ?
+    product.dom.wrapper.remove();
 
     thisCart.update();
   }
@@ -158,7 +158,7 @@ class Cart {
     };
 
     for (let product of thisCart.products) {
-      payload.products.push(product.getData()); //Pytanie: getData() jest zadeklarowana w innej metodzie. Widzi ją dlatego, że Cart tworzy instancję new CartProduct? Czemu this nie jest potrzebne?
+      payload.products.push(product.getData());
     }
     //console.log('payload:',payload);
 
