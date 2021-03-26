@@ -42,6 +42,15 @@ class BaseWidget {
 
     thisWidget.dom.wrapper.innerHTML = thisWidget.value;
   }
+
+  announce() {
+    const thisWidget = this;
+
+    const event = new CustomEvent('updated', {
+      bubbles: true,
+    });
+    thisWidget.dom.wrapper.dispatchEvent(event);
+  }
 }
 
 export default BaseWidget;

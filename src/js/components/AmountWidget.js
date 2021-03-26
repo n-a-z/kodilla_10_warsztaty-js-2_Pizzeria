@@ -67,14 +67,6 @@ class AmountWidget extends BaseWidget {
     });
   }
 
-  announce() {
-    const thisWidget = this;
-
-    const event = new CustomEvent('updated', {
-      bubbles: true,
-    });
-    thisWidget.dom.wrapper.dispatchEvent(event);
-  }
 }
 
 export default AmountWidget;
