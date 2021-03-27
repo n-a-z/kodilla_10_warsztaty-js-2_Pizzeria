@@ -6,20 +6,26 @@ class BaseWidget {
 
     thisWidget.dom.wrapper = wrapperElement;
 
-    thisWidget.value = initialValue;
+    thisWidget.correctValue = initialValue;
   }
 
-  setValue(value) {
+  get value() {
+    const thisWidget = this;
+
+    return thisWidget.correctValue;
+  }
+
+  set value(value) {
     const thisWidget = this;
     const newValue = thisWidget.parseValue(value);
     //console.log('thisWidget.value:',thisWidget.value);
 
     if (
       //!isNaN(newValue) &&
-      thisWidget.value !== newValue &&
+      thisWidget.correctValue !== newValue &&
       thisWidget.isValid(newValue)
     ) {
-      thisWidget.value = newValue;
+      thisWidget.correctValue = newValue;
       //console.log('if newValue',newValue);
       //thisWidget.announce();
       thisWidget.announce();
@@ -27,6 +33,12 @@ class BaseWidget {
 
     //thisWidget.dom.input.value = thisWidget.value;
     thisWidget.renderValue();
+  }
+
+  setValue(value) {
+    const thisWidget = this;
+
+    thisWidget.value = value;
   }
 
   parseValue(value) {
