@@ -1,4 +1,4 @@
-import { select, templates, settings } from '../settings.js';
+import { select, templates, settings, classNames } from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
@@ -102,12 +102,12 @@ class Booking {
     for (let item of eventsRepeat) {
       if (item.repeat === 'daily') {
         for(let loopDate = minDate; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)){
-          thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
+          thisBooking.makeBooked(utils.datetos, item.hour, item.duration, item.table);
         }
       }
     }
 
-    //console.log('thisBooking.booked', thisBooking.booked);
+    console.log('thisBooking.booked', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
@@ -131,6 +131,39 @@ class Booking {
       }
 
       thisBooking.booked[date][hourBlock].push(table);
+    }
+  }
+
+  updateDOM() {
+    const thisBooking = this;
+
+    thisBooking.date = thisBooking.datePicker.value;
+    thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
+    let allAvailable = false;
+
+    if (
+      typeof thisBooking.booked[thisBooking.date] == 'undefined'
+      || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
+    ) {
+      allAvailable = true;
+    }
+
+    for (let table of thisBooking.dom.tables) {
+      let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+
+      if (!isNaN(tableId)) {
+        tableId = parseInt(tableId);
+      }
+      if (
+        !allAvailable
+        &&
+        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
+      ) {
+        table.classList.add(classNames.booking.tableBooked);
+      } else {
+        table.classList.remove(classNames.booking.tableBooked);
+      }
     }
   }
 
@@ -166,6 +199,8 @@ class Booking {
 
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+
+    thisBooking.dom.tables =thisBooking.dom.wrapper.querySelectorAll(select.booking.table);
   }
 
   initWidget() {
