@@ -96,13 +96,18 @@ class Booking {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
 
+    const minDate = thisBooking.datePicker.minDate;
+    const maxDate = thisBooking.datePicker.maxDate;
+
     for (let item of eventsRepeat) {
       if (item.repeat === 'daily') {
-        thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
+        for(let loopDate = minDate; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)){
+          thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
+        }
       }
     }
 
-    console.log('thisBooking.booked', thisBooking.booked);
+    //console.log('thisBooking.booked', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
