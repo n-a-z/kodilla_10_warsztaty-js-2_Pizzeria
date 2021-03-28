@@ -203,7 +203,7 @@ class Booking {
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
 
-    thisBooking.dom.tables =thisBooking.dom.wrapper.querySelectorAll(select.booking.table);
+    thisBooking.dom.tables =thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
   }
 
   initWidget() {
