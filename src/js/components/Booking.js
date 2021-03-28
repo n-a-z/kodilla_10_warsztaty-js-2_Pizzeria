@@ -1,7 +1,7 @@
 import { select, templates } from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
-//import HourPicker from './HourPicker.js';
+import HourPicker from './HourPicker.js';
 //import utils from '../utils.js';
 
 class Booking {
@@ -37,7 +37,7 @@ class Booking {
     //console.log('thisBooking.dom.hourPicker',thisBooking.dom.hourPicker);
 
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    //thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
 
 
   }
@@ -46,7 +46,7 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
-    //thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+    thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
   }
 }
 
