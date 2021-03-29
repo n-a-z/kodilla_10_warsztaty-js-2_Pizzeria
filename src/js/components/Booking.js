@@ -146,8 +146,8 @@ class Booking {
     let allAvailable = false;
 
     if (
-      typeof thisBooking.booked[thisBooking.date] == 'undefined'
-      || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
+      typeof thisBooking.booked[thisBooking.date] === 'undefined'
+      || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] === 'undefined'
     ) {
       allAvailable = true;
     }
@@ -214,7 +214,7 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function() {
       thisBooking.updateDOM();
-      console.log('thisBooking.updateDOM()', thisBooking.updateDOM());
+      //console.log('thisBooking.updateDOM()', thisBooking.updateDOM());
     });
   }
 }
