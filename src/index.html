@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext"
+    rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <header class="header">
@@ -21,6 +24,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#homepage">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +66,148 @@
   </header>
 
   <div id="pages">
+    <section id="homepage">
+      <div class="home-wrapper container">
+        <div class="wrapper">
+          <a href="#order">
+            <div class="homepage-button button-small main-info__order">
+              <p>ORDER ONLINE</p>
+              <p>Delicious food delivered to your door</p>
+              <img src="/images/homepage/pizza-1.jpg" alt="image" />
+            </div>
+          </a>
+          <a href="#booking">
+            <div class="homepage-button button-small main-info__book">
+              <p>BOOK A TABLE</p>
+              <img src="/images/homepage/pizza-2.jpg" alt="image" />
+            </div>
+          </a>
+        </div>
+        <div class="homepage-button button-big">
+          <p>OPENING HOURS</p>
+          <p>TUE-SUN, 12PM-12AM</p>
+        </div>
+      </div>
+
+      <!-- Slideshow container -->
+      <div class="main-carousel container"
+        data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "autoPlay": 3000, "pageDots": true }'>
+        <div class="carousel-cell">
+          <div class="image">
+            <img src="/images/homepage/pizza-3.jpg" alt="pizza-3" />
+          </div>
+          <div class="text">
+            <p>AMAZING SERVICE</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+              ut aliquip ex ea commodo consequat.
+            </p>
+            <p>-Margaret Osbourne</p>
+          </div>
+        </div>
+
+        <div class="carousel-cell">
+          <div class="image">
+            <img src="/images/homepage/pizza-4.jpg" alt="pizza-4" />
+          </div>
+          <div class="text">
+            <p>AMAZING SERVICE</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+              ut aliquip ex ea commodo consequat.
+            </p>
+            <p>-Margaret Osbourne</p>
+          </div>
+        </div>
+
+        <div class="carousel-cell">
+          <div class="image">
+            <img src="/images/homepage/pizza-5.jpg" alt="pizza-5" />
+          </div>
+          <div class="text">
+            <p>AMAZING SERVICE</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+              ut aliquip ex ea commodo consequat.
+            </p>
+            <p>-Margaret Osbourne</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Gallery-->
+      <div class="gallery-wrapper container">
+        <div class="pic-wrapper">
+          <div class="picture">
+            <img src="/images/homepage/pizza-4.jpg" alt="pizza-4" />
+            <div class="icon-wrapper">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+        <div class="pic-wrapper">
+          <div class="picture">
+            <img src="/images/homepage/pizza-5.jpg" alt="pizza-5" />
+            <div class="icon-wrapper">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+        <div class="pic-wrapper">
+          <div class="picture">
+            <img src="/images/homepage/pizza-6.jpg" alt="pizza-6" />
+            <div class="icon-wrapper">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+        <div class="pic-wrapper">
+          <div class="picture">
+            <img src="/images/homepage/pizza-7.jpg" alt="pizza-7" />
+            <div class="icon-wrapper">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+        <div class="pic-wrapper">
+          <div class="picture">
+            <img src="/images/homepage/pizza-8.jpg" alt="pizza-8" />
+            <div class="icon-wrapper">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+        <div class="pic-wrapper">
+          <div class="picture">
+            <img src="/images/homepage/pizza-9.jpg" alt="pizza-9" />
+            <div class="icon-wrapper">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="footer container">
+        <a href="#">View more on Instagram</a>
+      </div>
+    </section>
+
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -248,4 +394,5 @@
   <script src="vendor/range-slider.min.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
+
 </html>
