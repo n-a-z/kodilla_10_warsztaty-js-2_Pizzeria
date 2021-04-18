@@ -12,6 +12,7 @@ class Booking {
     thisBooking.initWidget();
     //console.log('thisBooking.booking',thisBooking.booking);
     thisBooking.getData();
+    thisBooking.reservationTable = null;
   }
 
   getData() {
@@ -101,8 +102,17 @@ class Booking {
 
     for (let item of eventsRepeat) {
       if (item.repeat === 'daily') {
-        for(let loopDate = minDate; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)){
-          thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
+        for (
+          let loopDate = minDate;
+          loopDate <= maxDate;
+          loopDate = utils.addDays(loopDate, 1)
+        ) {
+          thisBooking.makeBooked(
+            utils.dateToStr(loopDate),
+            item.hour,
+            item.duration,
+            item.table
+          );
         }
       }
     }
@@ -146,8 +156,9 @@ class Booking {
     let allAvailable = false;
 
     if (
-      typeof thisBooking.booked[thisBooking.date] === 'undefined'
-      || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] === 'undefined'
+      typeof thisBooking.booked[thisBooking.date] === 'undefined' ||
+      typeof thisBooking.booked[thisBooking.date][thisBooking.hour] ===
+        'undefined'
     ) {
       allAvailable = true;
     }
@@ -159,8 +170,7 @@ class Booking {
         tableId = parseInt(tableId);
       }
       if (
-        !allAvailable
-        &&
+        !allAvailable &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ) {
         table.classList.add(classNames.booking.tableBooked);
@@ -203,7 +213,10 @@ class Booking {
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
 
-    thisBooking.dom.tables =thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(
+      select.booking.tables
+    );
+    thisBooking.dom.allTables = element.querySelector(select.booking.allTables);
   }
 
   initWidget() {
@@ -212,10 +225,48 @@ class Booking {
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-    thisBooking.dom.wrapper.addEventListener('updated', function() {
+    thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
       //console.log('thisBooking.updateDOM()', thisBooking.updateDOM());
     });
+
+    thisBooking.dom.allTables.addEventListener('click', function () {
+      thisBooking.initTables();
+    });
+  }
+
+  initTables() {
+    const thisBooking = this;
+
+    const clickedElement = event.target;
+    const tableId = clickedElement.getAttribute('data-table');
+    if (tableId) {
+      if (!clickedElement.classList.contains(classNames.booking.tableBooked)) {
+        thisBooking.reservationTable = tableId;
+        console.log(thisBooking.reservationTable);
+      } else {
+        alert('Ten stolik jest zajęty');
+      }
+
+      for (let table of thisBooking.dom.tables) {
+        table.classList.remove(classNames.booking.tableSelected);
+        if (
+          clickedElement.classList.contains('table') &&
+          thisBooking.reservationTable == tableId
+        ) {
+          clickedElement.classList.add(classNames.booking.tableSelected);
+          thisBooking.reservationTable = tableId;
+        } else {
+          thisBooking.reservationTable = null;
+          clickedElement.classList.remove(classNames.booking.tableSelected);
+        }
+      }
+      if (
+        !clickedElement.classList.contains(classNames.booking.tableSelected)
+      ) {
+        thisBooking.reservationTable = null;
+      }
+    }
   }
 }
 
