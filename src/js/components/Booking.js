@@ -217,6 +217,10 @@ class Booking {
       select.booking.tables
     );
     thisBooking.dom.allTables = element.querySelector(select.booking.allTables);
+    thisBooking.dom.form = element.querySelector(select.booking.form);
+    thisBooking.dom.starters = document.querySelectorAll(
+      select.booking.starters
+    );
   }
 
   initWidget() {
@@ -227,6 +231,10 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
+      thisBooking.dom.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisBooking.sendBooking();
+      });
       //console.log('thisBooking.updateDOM()', thisBooking.updateDOM());
     });
 
@@ -267,6 +275,47 @@ class Booking {
         thisBooking.reservationTable = null;
       }
     }
+  }
+
+  sendBooking() {
+    const thisBooking = this;
+    console.log('sendBooking');
+
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const booking = {
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      duration: thisBooking.hoursAmount.value,
+      ppl: thisBooking.peopleAmount.value,
+      table: thisBooking.tableBooked,
+      starters: [],
+    };
+
+    for (let starter of thisBooking.dom.starters) {
+      if (starter.checked == true) {
+        booking.starters.push(starter.value);
+      }
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(booking),
+    };
+
+    fetch(url, options)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (parsedResponse) {
+        console.log('parsedResponse', parsedResponse);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
 }
 
